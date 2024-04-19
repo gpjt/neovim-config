@@ -24,6 +24,9 @@ plugins = {
 	end,
     },
     {
+        "neovim/nvim-lspconfig",
+    },
+    {
         "ctrlpvim/ctrlp.vim",
     },
 }
@@ -44,5 +47,4 @@ vim.g.ctrlp_root_markers = { "pyproject.toml" }
 vim.g.ctrlp_custom_ignore = "\\v(\\.git|__pycache__)/"
 vim.keymap.set("n", "<C-p>", ":CtrlP<CR>")
 vim.keymap.set("n", "<C-=>", ":CtrlPBuffer<CR>")
-
 
