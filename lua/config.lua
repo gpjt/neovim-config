@@ -50,7 +50,10 @@ search_project = function()
     vim.cmd.grep { args = { "-Iir", regex, "."} }
     vim.cmd.copen()
 end
+-- This works on Linux (where alacritty swallows control-shift-F
 vim.keymap.set("n", "<S-D-F>", search_project)
+-- This works on the Mac (where the iTerm2 swallows command-shift-F
+vim.keymap.set("n", "<C-S-F>", search_project)
 
 
 -- CtrlP config
