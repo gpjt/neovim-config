@@ -24,7 +24,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Define our plugins
 plugins = {
     -- For our default theme, don't load it lazily, and make it the most important one
-    { 
+    {
 	"aktersnurra/no-clown-fiesta.nvim",
 	lazy = False,
 	priority = 1000,
@@ -50,7 +50,7 @@ search_project = function()
     vim.cmd.grep { args = { "-Iir", regex, "."} }
     vim.cmd.copen()
 end
-vim.keymap.set("n", "<C-S-f>", search_project)
+vim.keymap.set("n", "<S-D-F>", search_project)
 
 
 -- CtrlP config
