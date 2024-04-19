@@ -23,14 +23,26 @@ plugins = {
             vim.cmd([[colorscheme no-clown-fiesta]])
 	end,
     },
+    {
+        "ctrlpvim/ctrlp.vim",
+    },
 }
 
 require("lazy").setup(plugins)
+
 
 search_project = function()
     regex = vim.fn.input("Search for: ")
     vim.cmd.grep { args = { "-Iir", regex, "."} }
     vim.cmd.copen()
 end
+vim.keymap.set("n", "<C-S-f>", search_project)
 
-vim.keymap.set("n", "<C-S-f>", search_project, { silent = True })
+
+vim.g.ctrlp_working_path_mode = "ra"
+vim.g.ctrlp_root_markers = { "pyproject.toml" }
+vim.g.ctrlp_custom_ignore = "\\v(\\.git|__pycache__)/"
+vim.keymap.set("n", "<C-p>", ":CtrlP<CR>")
+vim.keymap.set("n", "<C-=>", ":CtrlPBuffer<CR>")
+
+
