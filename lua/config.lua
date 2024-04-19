@@ -1,6 +1,13 @@
-local set = vim.opt
-set.number = true
+-- Show line numbers
+vim.opt.number = true
 
+-- Remove trailing whitespace on save
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = { "*" },
+    command = [[%s/\s\+$//e]],
+})
+
+-- Set up lazy, our plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system({
@@ -14,7 +21,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Define our plugins
 plugins = {
+    -- For our default theme, don't load it lazily, and make it the most important one
     { 
 	"aktersnurra/no-clown-fiesta.nvim",
 	lazy = False,
@@ -31,9 +40,11 @@ plugins = {
     },
 }
 
+-- Kick off the plugin loading
 require("lazy").setup(plugins)
 
 
+-- My own find-across-project thing
 search_project = function()
     regex = vim.fn.input("Search for: ")
     vim.cmd.grep { args = { "-Iir", regex, "."} }
@@ -42,6 +53,7 @@ end
 vim.keymap.set("n", "<C-S-f>", search_project)
 
 
+-- CtrlP config
 vim.g.ctrlp_working_path_mode = "ra"
 vim.g.ctrlp_root_markers = { "pyproject.toml" }
 vim.g.ctrlp_custom_ignore = "\\v(\\.git|__pycache__)/"
